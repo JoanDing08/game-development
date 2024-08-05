@@ -1,0 +1,31 @@
+t=(1,2,3,4)
+print(type(t))
+u=(5,)
+print(type(u))
+#tuples support index positions
+print(t[3])
+#tuple doesn't support add/remove/changing items (immutable)
+l=list(t)
+print(l)
+#slicing tuples
+print(t[1:])
+v=(7,8,9,10)
+#concatenation
+print(t+v)
+#nested tuple
+w=(t,v)
+print(w)
+#deleting a tuple
+del v
+
+print(len(t))
+a=tuple("yellow")
+print(tuple(a))
+
+for i in a:
+    print(i)
+
+#packing and unpacking
+address=(23,"london_rd","london",56789)
+(streetnum,streetname,city,pin)=address
+print(city)
