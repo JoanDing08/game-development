@@ -1,0 +1,50 @@
+import pgzrun
+from random import randint
+from time import time
+WIDTH=550
+HEIGHT=550
+satelites=[]
+lines=[]
+st_time=0
+ttl_time=0
+ttl_sats=10
+current_sat=0
+def make_satelites():
+    global st_time,satelites
+    for i in range(ttl_sats):
+        sats=Actor("satelite")
+        sats.pos=randint(50,500),randint(50,500)
+        satelites.append(sats)
+    st_time=time()
+
+def draw():
+    global ttl_time,st_time
+    screen.blit("starry sky",(0,0))
+    num=1
+    for i in satelites:
+        screen.draw.text(str(num),(i.pos[0],i.pos[1]+20))
+        i.draw()
+        num+=1
+    for i in lines:
+        screen.draw.line(i[0],i[1],"white")
+    if current_sat<ttl_sats:
+        ttl_time=time()-st_time
+        screen.draw.text(str(round(ttl_time,0)),(50,50),fontsize=20)
+    else:
+        screen.draw.text(str(round(ttl_time,0)),(50,50),fontsize=20)
+
+make_satelites()
+
+def on_mouse_down(pos):
+    global current_sat,ttl_sats,satelites,lines
+    if current_sat<ttl_sats:
+        if satelites[current_sat].collidepoint(pos):
+            if satelites:
+                lines.append((satelites[current_sat-1].pos,satelites[current_sat].pos))
+            current_sat+=1
+        else:
+            current_sat=0
+            lines=[]
+
+
+pgzrun.go()
