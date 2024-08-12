@@ -1,0 +1,37 @@
+set1={1,2,3,4}
+print(type(set1))
+l1=[5,6,7,8]
+#type casting
+set2=set([11,12,13])
+print(set2)
+#adding elements to a set
+set1.add(5)
+print(set1)
+#no indexing, changing values 
+#no duplicates
+set1.add(4)
+print(set1)
+"""frozen=frozenset(["a","b","c"])
+frozen.add("d")
+print(frozen)"""
+#removing values from a set
+set1.remove(3)
+print(set1)
+set1.discard(6)
+print(set1)
+#set operations
+a={1,2,3,4,5}
+b={4,5,6,7,8}
+#union
+print(a.union(b))
+print(a|b)
+#intersection
+print(a.intersection(b))
+print(a&b)
+#difference
+print(a-b)
+print(b-a)
+print(a.difference(b))
+#symetric difference
+print(a.symmetric_difference(b))
+print(a^b)
