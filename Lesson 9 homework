@@ -11,3 +11,26 @@ if letters&b==letters:
     print("Well done, this is a pangram.")
 else:
     print("This is not a pangram.")
+
+
+#other way to do it
+
+letters=[]
+import string
+for i in string.ascii_lowercase:
+    letters.append(i)
+
+letters2=set(letters)
+a=input("Please try to write a pangram: ")
+
+pangram=False
+for i in letters2:
+    if i in a:
+        pangram=True
+    else:
+        pangram=False
+
+if pangram:
+    print("This is a pangram.")
+else:
+    print("This is not a pangram.")
