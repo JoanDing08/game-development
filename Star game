@@ -2,8 +2,8 @@ import pgzrun
 import random
 HEIGHT=500
 WIDTH=500
-levels=4
-items=["bottleimg","chipsimg","plastic bag","batteryimg"]
+levels=6
+items=["blue star","green star","orange star","ourple star","red star"]
 current_lvl=1
 start_speed=11
 win=False
@@ -12,11 +12,11 @@ lvl_items=[]
 animations=[]
 def draw():
     screen.clear()
-    screen.blit("recyclebg",(0,0))
+    screen.blit("spacebg3",(0,0))
     if win:
-        screen.draw.text("You win",fontsize=50,center=(250,250),color="black")
+        screen.draw.text("You win",fontsize=50,center=(250,250),color="white")
     elif lose:
-        screen.draw.text("You fail",fontsize=50,center=(250,250),color="black")
+        screen.draw.text("You fail",fontsize=50,center=(250,250),color="white")
     else:
         for i in lvl_items:
             i.draw()
@@ -34,7 +34,7 @@ def update():
         lvl_items=combine(current_lvl)
 
 def item_creation(itemnum):
-    item_list=["paperimg"]
+    item_list=["yellow star"]
     for i in range(itemnum):
         item=random.choice(items)
         item_list.append(item)
@@ -86,7 +86,7 @@ def on_mouse_down(pos):
     global lvl_items
     for i in lvl_items:
         if i.collidepoint(pos):
-            if "paperimg" in i.image:
+            if "yellow star" in i.image:
                 game_win()
             else:
                 gameover()
