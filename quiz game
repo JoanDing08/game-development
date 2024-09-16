@@ -46,7 +46,7 @@ def draw():
     screen.draw.textbox(Q[0],questionbox,color="white")
     Q_index=1
     for i in answerboxes:
-        screen.draw.textbox(Q[Q_index],i,color="white")
+        screen.draw.textbox(Q[Q_index].strip(),i,color="white")
         Q_index+=1
 
 def update():
@@ -66,8 +66,47 @@ def readQ():
     qcount+=1
     return questions.pop(0).split("|")
 
+def countDown():
+    global timer
+    if timer:
+        timer-=1
+    else:
+        game_over()
+
+def game_over():
+    global Q,msg,gameover,timer
+    msg=f"Time's up! You got {score}/{qtotal}"
+    Q=[msg,"-","-","-","-",5]
+    timer=0
+    gameover=True
+
+def on_mouse_down(pos):
+    global answerboxes,score,Q,questions,timer
+    index=1
+    for i in answerboxes:
+        if i.collidepoint(pos):
+            if index is int(Q[5]):
+                score+=1
+                if questions:
+                    Q=readQ()
+                    timer=20
+                else:
+                    game_over()
+            else:
+                game_over()
+        index+=1
+    if skipbox.collidepoint(pos):
+        skipQ()
+
+def skipQ():
+    global timer,Q
+    if questions and not gameover:
+        Q=readQ()
+        timer=20
+    else:
+        game_over()
 
 load_questions()
 Q=readQ()
-
+clock.schedule_interval(countDown,1)
 pgzrun.go()
